@@ -1,10 +1,10 @@
-import Uploader from './components/Uploader';
-import Goals from "./components/Goals/Goals";
-import HomePlaceholder from "./components/HomePlaceholder";
+import Uploader from './components/Uploader.js';
+import Goals from "./components/Goals/Goals.js";
+import HomePlaceholder from "./components/HomePlaceholder.js";
 import { ChakraProvider } from "@chakra-ui/react";
 import chakraTheme from "@chakra-ui/theme";
 import React, {useState} from 'react';
-import Chat from './Chat';
+import Chat from './Chat.js';
 import { Button, ButtonGroup } from "@chakra-ui/react";
 
 function App() {
