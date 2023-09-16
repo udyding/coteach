@@ -28,8 +28,10 @@ print(questions)
 
 for q in questions:
 
-    chat_history = []
+    # number of follow up questions
     max_turns = 2
+
+    # faking an initial chat history
     chat_history = [
         {"user_name": "User", "text": """I'm trying to study for a test. Ask me a question based on these notes: """ + notes},
         {"user_name": "Chatbot", "text": q},
