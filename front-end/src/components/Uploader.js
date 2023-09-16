@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { Heading } from "@chakra-ui/react";
+
 
 function Uploader() {
-    return(
-        <main>
-            <form action="">
-                <input type="text" accept='image/*'/>
-            </form>
-        </main>
-    )
+    return (
+      <main>
+        <Heading size='md'>Upload your notes</Heading>
+        <form action="">
+          <input type="file" accept="image/*" />
+        </form>
+      </main>
+    );
 }
 
 export default Uploader
