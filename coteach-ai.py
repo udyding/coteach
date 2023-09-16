@@ -24,7 +24,7 @@ output = co.generate(
 )
 
 questions = output.generations[0].text.split('\n')
-print(questions)
+# print(questions)
 
 for q in questions:
 
@@ -39,11 +39,11 @@ for q in questions:
     print(q)
 
         
-    for _ in range(max_turns):
+    for x in range(max_turns):
         # get user input
         user_answer = input("Answer the question here: ")
         message = "My answer is: " + user_answer + """Comment on how well I answered the question, 
-        then ask a follow up open-ended question that is still contained within the notes."""
+        then ask me a follow up open-ended question that is still contained within the notes."""
         
         # generate a response with the current chat history
         response = co.chat(
@@ -52,7 +52,8 @@ for q in questions:
             chat_history=chat_history
         )
         answer = response.text
-            
+
+        print("follow up " + str(x) + ": ")    
         print(answer)
 
         # add message and answer to the chat history
@@ -61,3 +62,24 @@ for q in questions:
         
         chat_history.append(user_message)
         chat_history.append(bot_message)
+
+    # get final user input
+    user_answer = input("Answer the question here: ")
+    message = "My answer is: " + user_answer + """Comment on how well I answered the question. Don't ask anymore questions."""
+    
+    # generate a response with the current chat history
+    response = co.chat(
+        message,
+        temperature=0.8,
+        chat_history=chat_history
+    )
+    answer = response.text
+        
+    print(answer)
+
+    # add message and answer to the chat history
+    user_message = {"user_name": "User", "text": message}
+    bot_message = {"user_name": "Chatbot", "text": answer}
+    
+    chat_history.append(user_message)
+    chat_history.append(bot_message)
