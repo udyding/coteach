@@ -10,11 +10,12 @@ A computer program that runs within a distributed system is called a distributed
 Distributed computing also refers to the use of distributed systems to solve computational problems. In distributed computing, a problem is divided into many tasks, each of which is solved by one or more computers, which communicate with each other via message passing.
 
 """
-
+# initial prompt to get the list of questions
 prompt="""This is a teacher that generates questions based on a given text. Text: """ + notes + """ Generate 
 3 distincively different open-ended questions to test the understanding of a person to the given notes. 
 Each question is separated by a new line"""
 
+# using co.generate 
 output = co.generate(
   prompt = prompt,
   model = 'command',
@@ -23,13 +24,12 @@ output = co.generate(
 )
 
 questions = output.generations[0].text.split('\n')
-#print(questions)
-
+print(questions)
 
 for q in questions:
 
     chat_history = []
-    max_turns = 1
+    max_turns = 2
     chat_history = [
         {"user_name": "User", "text": """I'm trying to study for a test. Ask me a question based on these notes: """ + notes},
         {"user_name": "Chatbot", "text": q},
@@ -40,7 +40,8 @@ for q in questions:
     for _ in range(max_turns):
         # get user input
         user_answer = input("Answer the question here: ")
-        message = "Comment on Ask a follow up open-ended question that is still contained within the notes to this answer:" + user_answer
+        message = "My answer is: " + user_answer + """Comment on how well I answered the question, 
+        then ask a follow up open-ended question that is still contained within the notes."""
         
         # generate a response with the current chat history
         response = co.chat(
