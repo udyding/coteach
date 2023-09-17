@@ -60,7 +60,6 @@ export function Chat({ notes }) {
     <main>
       <Heading size="md">Chat</Heading>
       <div>
-        <p>old</p>
         {chatHistory.slice(0, -1).map((entry) => {
           return (
             <h1>

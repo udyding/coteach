@@ -34,7 +34,7 @@ function getParagraphs(content) {
     return paragraphs;
   }
 
-function App() {
+function FileUpload({setFileContent}) {
   const [paragraphs, setParagraphs] = useState([]);
 
   const handleFileUpload = (event) => {
@@ -47,6 +47,7 @@ function App() {
         const content = e.target.result;
         const paragraphs = getParagraphs(content);
         setParagraphs(paragraphs);
+        setFileContent(paragraphs.join(""));
       };
   
       reader.onerror = (err) => console.error(err);
@@ -72,4 +73,4 @@ function App() {
   );
 }
 
-export default App;
+export default FileUpload;

@@ -3,9 +3,9 @@ import axios from "axios";
 export async function getResponse(userAnswer, getFollowup, chatHistory) {
   // if getFollowup, get the followup question for the user's response to the previous question
   const promptType = getFollowup
-    ? "Comment on how well I answered the question, then ask me a follow up open-ended question that is still contained within the notes. Do not reply with text that requires formatting, like a list."
-    : "Comment on how well I answered the question. Don't ask anymore questions under any circumstances, and do not end your response in a question or a question mark. Do not reply with text that requires formatting, like a list.";
-  const prompt = "My answer is: " + userAnswer + promptType;
+    ? "Comment on how accurate I answered the question in less than 100 words. Then ask me a follow up open-ended question that is still contained within the notes, filter out opinionated questions and only ask factual questions. Do not ask me whether I want to know more about something."
+    : "Comment on how accurate I answered the question in less than 100 words. Do not ask anymore follow-up questions in this response.";
+  const prompt = promptType + "This is my answer: " + userAnswer;
 
   try {
     const response = await axios.post(
@@ -24,7 +24,12 @@ export async function getResponse(userAnswer, getFollowup, chatHistory) {
         },
       }
     );
-    const feedback = response.data.text;
+    let feedback = response.data.text;
+    if (!getFollowup && feedback.at(-1) === '?') {
+      console.log(feedback.at(-1))
+      feedback = feedback.split('.').slice(0, -1).join('.')
+      feedback += '.'
+    }
     return feedback;
   } catch (err) {
     console.log(err);
