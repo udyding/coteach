@@ -75,8 +75,8 @@ const theme = extendTheme({
             transition={{ ease: "easeOut", duration: 1, delay: 0.75 }}
           >
             <Button onClick={handleSubmit} size='lg' style={{
-              backgroundColor: "#683F19",
-              color: "#382323",
+              backgroundColor: "#382323",
+              color: "#FFF6E9",
               borderRadius: "8px",
             }}>Start Teaching</Button>
           </motion.div>
