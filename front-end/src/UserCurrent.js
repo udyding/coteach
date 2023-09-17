@@ -18,6 +18,7 @@ export const User = ({ setInput, setCurrentInputIndex, key }) => {
     useLegacyResults: false,
   });
   const [userResponse, setUserResponse] = useState("");
+  const [runningResponse, setRunningResponse] = useState("")
 
   useEffect(() => {
     if (!isRecording && results.length) {
@@ -27,12 +28,19 @@ export const User = ({ setInput, setCurrentInputIndex, key }) => {
     }
   }, [isRecording, results]);
 
+  useEffect(() => {
+    if (interimResult) {
+      setRunningResponse(interimResult)
+    }
+  }, [interimResult])
+
   if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
   const handleSubmit = () => {
     setInput(userResponse);
     setUserResponse("");
+    setRunningResponse("")
   };
-
+  console.log('RESULTS', results)
   return (
     <>
       <Flex gap={6}>
@@ -51,7 +59,7 @@ export const User = ({ setInput, setCurrentInputIndex, key }) => {
 
         <Flex flexDirection="column" gap={4}>
           <Text fontSize="3xl" color="yellow.900">
-            {userResponse}
+            {runningResponse}
           </Text>
 
           <Flex gap={4}>
@@ -85,6 +93,7 @@ export const User = ({ setInput, setCurrentInputIndex, key }) => {
                 backgroundColor: "#F1E5D7",
                 color: "#683F19",
               }}
+              isDisabled={!userResponse}
             >
               Done
             </Button>

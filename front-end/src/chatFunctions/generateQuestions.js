@@ -3,9 +3,9 @@ import axios from "axios";
 export async function generateQuestions(notes) {
   // given a JSON string containing the text from the user's notes, generate questions to ask the user
   const prompt =
-    "This is a teacher that generates questions based on a given study sheet containing factual information. Here is this study sheet: " +
+    "This is a teacher that generates questions based on a given study sheet containing factual information. Here is the study sheet: " +
     notes +
-    "Generate 10 distinct open-ended questions about different concepts in the sheet to test one's understanding. In each question, mention exactly what topic is being asked about. Each question should be separated by a period.";
+    "Generate 10 distinct open-ended questions about different topics in the sheet to test one's understanding. In each question, mention exactly what topic is being asked about. Each question should be separated by a period.";
 
   try {
     const response = await axios.post(

@@ -64,7 +64,7 @@ export function Chat({ notes }) {
 
   return (
     <main>
-      <Heading size="md">Chat</Heading>
+      <Heading fontSize='4xl' color='yellow.900' fontWeight='extrabold'>Chat</Heading>
       <div>
         <Bot text="Hey there! Let's start learning." />
         {chatHistory.map((entry) => {
