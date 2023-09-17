@@ -28,7 +28,7 @@ function HomePlaceholder() {
       }} />
       
       {/* example questions blobs */}
-      {/* <Flex style={{
+      <Flex style={{
         backgroundColor: "#683F19",
         color: "#FFF5DF",
         padding: "28px",
@@ -55,7 +55,7 @@ function HomePlaceholder() {
       }} gap={4}  >
         <Text fontWeight="bold" fontSize="xl">Q2</Text>
         <Text fontSize="md">Describe the difference between the habits of various attachment styles.</Text>
-      </Flex> */}
+      </Flex>
 
     </Flex>
   );
