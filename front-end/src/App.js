@@ -59,7 +59,7 @@ const theme = extendTheme({
         <Flex flexDirection='column' style={{
             margin: 'auto'
           }} gap={12}>
-          <Flex flexDirection='column' gap={12}>
+          <Flex flexDirection='column' gap={8}>
             <FileUpload setFileContent={setNotes} />
             <Goals />
           </Flex>
