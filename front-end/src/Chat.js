@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Heading } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/react";
+import { Bot } from "./Bot.js";
+import { User } from "./User.js";
 
 import { generateQuestions } from "./chatFunctions/generateQuestions.js";
 import { getResponse } from "./chatFunctions/getResponse.js";
