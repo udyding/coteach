@@ -1,6 +1,7 @@
 
 import Goals from "./components/Goals.js";
 import HomePlaceholder from "./components/HomePlaceholder.js";
+import {motion} from 'framer-motion'
 import { ChakraProvider, extendTheme, Flex } from "@chakra-ui/react";
 import FileUpload from './components/FileUpload.js';
 import '@fontsource/manrope'
@@ -19,7 +20,6 @@ import './index.css';
 // import {ReactComponent as ReactLogo} from '.uploadFile.svg';
 
 function App() {
-  const GoalGroups = ["Memorization", "Explanation", "Application", "Analysis"];
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [notes, setNotes] = useState("");
 
@@ -63,11 +63,23 @@ const theme = extendTheme({
             <FileUpload setFileContent={setNotes} />
             <Goals />
           </Flex>
-          <Button onClick={handleSubmit} size='lg' style={{
-            backgroundColor: "#683F19",
-            color: "#FFF5DF",
-            borderRadius: "8px",
-          }}>Start Teaching</Button>
+          <motion.div width="100%"
+            initial={{ 
+              opacity: 0,
+              y: -5,
+            }}
+            animate={{ 
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{ ease: "easeOut", duration: 1, delay: 0.75 }}
+          >
+            <Button onClick={handleSubmit} size='lg' style={{
+              backgroundColor: "#683F19",
+              color: "#382323",
+              borderRadius: "8px",
+            }}>Start Teaching</Button>
+          </motion.div>
         </Flex>  
       </Flex>
     </ChakraProvider>

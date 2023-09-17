@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { Heading } from "@chakra-ui/react";
+import { useState, useEffect, useRef } from "react";
+import { Flex } from "@chakra-ui/react";
 import { Bot } from "./Bot.js";
+import { BotLoading } from "./BotLoading.js";
 import { User } from "./UserCurrent.js";
 import { UserStatic } from "./UserStatic.js";
 
@@ -8,6 +9,8 @@ import { generateQuestions } from "./chatFunctions/generateQuestions.js";
 import { getResponse } from "./chatFunctions/getResponse.js";
 
 export function Chat({ notes }) {
+  const ref = useRef(null);
+  const [franklinLoading, setFranklinLoading] = useState(true)
   const [chatHistory, setChatHistory] = useState([]);
   const [getFollowupQuestion, setGetFollowupQuestion] = useState(true);
   const [questions, setQuestions] = useState([]);
@@ -25,6 +28,7 @@ export function Chat({ notes }) {
           ...chatHistory,
           { user_name: "Chatbot", text: generatedQuestions[0] },
         ]);
+        setFranklinLoading(false)
       } catch (err) {
         console.log(err);
       }
@@ -63,10 +67,12 @@ export function Chat({ notes }) {
   const currentText = chatHistory && chatHistory[chatHistory.length - 1];
 
   return (
-    <main>
-      <Heading size="md">Chat</Heading>
-      <div>
-        <Bot text="Hey there! Let's start learning." />
+    <Flex flexDirection='column' gap={16} style={{
+      margin: "100px",
+      marginBottom: "200px",
+    }}>
+      <Flex gap={16} flexDirection='column'>
+        <Bot text="Heyo, I'm Franklin. Let's start learning. Let me think of a couple questions..." />
         {chatHistory.map((entry) => {
           if (entry.user_name === "Chatbot") {
             return <Bot text={entry.text} />;
@@ -74,26 +80,21 @@ export function Chat({ notes }) {
             return <UserStatic text={entry.text} />;
           }
         })}
-      </div>
+        {franklinLoading && (
+          <BotLoading />
+        )}
+      </Flex>
       <div>
         {currentText && currentText.user_name === "Chatbot" && (
           <User
+            ref={ref}
             setInput={setCurrentInput}
             setCurrentInputIndex={setCurrentInputIndex}
             key={currInputIndex}
           />
         )}
-        {/* <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={currentInput}
-            style={{ background: "red" }}
-            onChange={(e) => setCurrentInput(e.target.value)}
-          />
-          <button type="submit">Submit</button>
-        </form> */}
       </div>
-    </main>
+    </Flex>
   );
 }
 

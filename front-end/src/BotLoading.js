@@ -2,7 +2,7 @@ import { Flex, Image, Tag, Text } from "@chakra-ui/react";
 import { motion } from 'framer-motion';
 import franklin from "./assets/franklin.png";
 
-export const Bot = ({ text }) => {
+export const BotLoading = () => {
   return (
     <motion.div
       initial={{
@@ -21,7 +21,12 @@ export const Bot = ({ text }) => {
       <Flex gap={6}
       >
         <Flex flexDirection="column" gap={2}>
-          <Image src={franklin} htmlWidth="90" fit alt="franklin" />
+          <motion.div
+            animate={{ scale: [0.8, 1, 0.8] }}
+            transition={{ ease: "easeIn", duration: 1, repeat: Infinity }}
+          >
+            <Image src={franklin} htmlWidth="90" fit alt="franklin" />
+          </motion.div>
           <Tag
             size="md"
             fontWeight="bold"
@@ -32,10 +37,8 @@ export const Bot = ({ text }) => {
             Franklin
           </Tag>
         </Flex>
-        <div className="typewriter">
-          <Text fontSize="4xl" color="orange.500">
-            {text}
-          </Text>
+        <div >
+          
         </div>
       </Flex>
     </motion.div>

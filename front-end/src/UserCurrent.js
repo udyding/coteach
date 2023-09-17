@@ -3,7 +3,7 @@ import pause from "./assets/pause.svg";
 import play from "./assets/play.svg";
 import { Flex, Image, Tag, Text, Button } from "@chakra-ui/react";
 import useSpeechToText from "react-hook-speech-to-text";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const User = ({ setInput, setCurrentInputIndex, key }) => {
   const {
@@ -43,14 +43,17 @@ export const User = ({ setInput, setCurrentInputIndex, key }) => {
             fontWeight="bold"
             justifyContent="center"
             variant="subtle"
-            colorScheme="yellow"
+            style={{
+              backgroundColor: "#683F19",
+              color: "#FFF6E9"
+            }}
           >
             You
           </Tag>
         </Flex>
 
         <Flex flexDirection="column" gap={4}>
-          <Text fontSize="3xl" color="yellow.900">
+          <Text fontSize="4xl" color="yellow.900">
             {userResponse}
           </Text>
 

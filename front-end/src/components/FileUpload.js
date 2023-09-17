@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 // import mammoth from "mammoth";
+import { motion } from 'framer-motion'
 import PizZip from "pizzip";
 import { DOMParser } from "@xmldom/xmldom";
 import '../index.css';
 import uploadFileLogo from '../assets/uploadFile.svg';
+import check from '../assets/check.svg';
 import { Text } from "@chakra-ui/react";
 
 
@@ -40,6 +42,7 @@ function getParagraphs(content) {
 
 function FileUpload({setFileContent}) {
   const [paragraphs, setParagraphs] = useState([]);
+  const [ uploadSuccess, setUploadSuccess ] = useState(false);
 
   const handleFileUpload = (event) => {
     event.preventDefault()
@@ -57,6 +60,7 @@ function FileUpload({setFileContent}) {
       reader.onerror = (err) => console.error(err);
   
       reader.readAsBinaryString(file);
+      setUploadSuccess(true);
 
     // reader.readAsText(event.target.files[0])
     // reader.onload = async (e) => { 
@@ -83,7 +87,21 @@ function FileUpload({setFileContent}) {
 
     // </>
 
-    <main>
+    <motion.main
+      style={{
+        width: "40%",
+      }}
+      initial={{ 
+        opacity: 0,
+        y: -10,
+      }}
+      animate={{ 
+        opacity: 1,
+        y: 0,
+        
+      }}
+      transition={{ ease: "easeOut", duration: 1, delay: 0.4, }}
+  >
       <Text fontSize='xl' as='b' style={
         {
           color: "#683F19",
@@ -106,23 +124,22 @@ function FileUpload({setFileContent}) {
             margin: "auto",
           }}
         >
-          {image ? (
-            <img src={image} width={60} height={60} alt={fileName} />
-          ) : (
             <img
-              src={uploadFileLogo}
+              src={uploadSuccess ? check : uploadFileLogo}
               alt="logo"
               style={{
                 width: "50px",
                 height: "50px",
                 margin: "auto",
+                transition: "all ease-in 0.5s"
               }}
             />
-          )}
-          <p> Upload a pdf, docx, or txt file</p>
+          <p style={{
+            transition: "all ease-in 0.5s"
+          }}> {uploadSuccess ? "File uploaded successfully!" : "Upload a pdf, docx, or txt file"}</p>
         </div>
       </form>
-    </main>
+    </motion.main>
   );
 }
 

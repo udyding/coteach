@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from 'framer-motion'
 import { Box, Flex } from "@chakra-ui/react";
 import { Heading, Text } from "@chakra-ui/react";
 import "../index.css";
@@ -24,12 +25,6 @@ const ButtonWrapper = ({ goal }) => {
   };
 
   return (
-    // <Button variant='outline' styles={isSelected ? selectedStyle : defaultStyle } onClick={() => {
-    //   setIsSelected(!isSelected)
-    //   console.log(isSelected)
-    // }}>
-    //   {goal}
-    // </Button>
     <Box style={ isSelected ? selectedStyle : defaultStyle } onClick={() => {
       setIsSelected(!isSelected)
     }}>
@@ -42,7 +37,20 @@ const ButtonWrapper = ({ goal }) => {
 function Goals() {
   const GoalsArray = ['Memorization', 'Explanation', 'Application', 'Analysis']
   return (
-    <main>
+    <motion.main
+      style={{
+        width: "40%",
+      }}
+      initial={{ 
+        opacity: 0,
+        y: -10,
+      }}
+      animate={{ 
+        opacity: 1,
+        y: 0
+      }}
+    transition={{ ease: "easeOut", duration: 1, delay: 0.6, }}
+  >
       <Heading size="md" style ={{color: "#683F19"}}>What are your goals?</Heading>
       <Text fontSize="sm" className="goalDescription">
         Select all that apply
@@ -52,7 +60,7 @@ function Goals() {
           <ButtonWrapper goal={goal} />
         ))}
       </Flex>
-    </main>
+    </motion.main>
   );
 }
 
