@@ -1,6 +1,5 @@
 import HomePlaceholder from "./components/HomePlaceholder.js";
 import { ChakraProvider, extendTheme, Flex } from "@chakra-ui/react";
-import Uploader from './components/Uploader.js';
 import FileUpload from './components/FileUpload.js';
 import '@fontsource/manrope'
 import '@fontsource/manrope/200.css'
@@ -62,16 +61,19 @@ const theme = extendTheme({
 
   return (
     <ChakraProvider theme={theme}>
-      <HomePlaceholder />
-      <Uploader />
-      <FileUpload />
-      <Goals />
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input type="text" />
-          <Button type="submit">Start Teaching</Button>
-        </form>
-      </div>
+      <Flex flexDirection='row' height="100%" width="100%">
+        <HomePlaceholder />
+        <Flex flexDirection='column'>
+          <FileUpload />
+          <Goals />
+          <div>
+            <form onSubmit={handleSubmit}>
+              <input type="text" />
+              <Button type="submit">Start Teaching</Button>
+            </form>
+          </div>
+        </Flex>
+      </Flex>
     </ChakraProvider>
   );
 }
