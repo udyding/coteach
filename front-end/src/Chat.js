@@ -13,6 +13,7 @@ export function Chat({ notes }) {
   const [questions, setQuestions] = useState([]);
   const [currQuestion, setCurrQuestion] = useState(1);
   const [currentInput, setCurrentInput] = useState("");
+  const [currInputIndex, setCurrentInputIndex] = useState(0);
 
   useEffect(() => {
     async function getQuestions() {
@@ -31,29 +32,33 @@ export function Chat({ notes }) {
     getQuestions();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const botResponse = await getResponse(currentInput, getFollowupQuestion, [
-      ...chatHistory,
-      { user_name: "User", text: currentInput },
-    ]);
-    const newResponses = [
-      { user_name: "User", text: currentInput },
-      { user_name: "Chatbot", text: botResponse },
-    ];
+  useEffect(() => {
+    async function handleUserResponse() {
+      const botResponse = await getResponse(currentInput, getFollowupQuestion, [
+        ...chatHistory,
+        { user_name: "User", text: currentInput },
+      ]);
+      const newResponses = [
+        { user_name: "User", text: currentInput },
+        { user_name: "Chatbot", text: botResponse },
+      ];
 
-    if (!getFollowupQuestion) {
-      // move on to next question
-      newResponses.push({
-        user_name: "Chatbot",
-        text: questions[currQuestion],
-      });
+      if (!getFollowupQuestion) {
+        // move on to next question
+        newResponses.push({
+          user_name: "Chatbot",
+          text: questions[currQuestion],
+        });
+      }
+
+      setChatHistory([...chatHistory, ...newResponses]);
+      setCurrQuestion(currQuestion + 1);
+      setGetFollowupQuestion(!getFollowupQuestion);
     }
-
-    setChatHistory([...chatHistory, ...newResponses]);
-    setCurrQuestion(currQuestion + 1);
-    setGetFollowupQuestion(!getFollowupQuestion);
-  };
+    if (currentInput) {
+      handleUserResponse();
+    }
+  }, [currentInput]);
 
   const currentText = chatHistory && chatHistory[chatHistory.length - 1];
 
@@ -71,7 +76,13 @@ export function Chat({ notes }) {
         })}
       </div>
       <div>
-        {currentText && currentText.user_name === "Chatbot" && <User />}
+        {currentText && currentText.user_name === "Chatbot" && (
+          <User
+            setInput={setCurrentInput}
+            setCurrentInputIndex={setCurrentInputIndex}
+            key={currInputIndex}
+          />
+        )}
         {/* <form onSubmit={handleSubmit}>
           <input
             type="text"

@@ -3,13 +3,13 @@ import pause from "./assets/pause.svg";
 import play from "./assets/play.svg";
 import { Flex, Image, Tag, Text, Button } from "@chakra-ui/react";
 import useSpeechToText from "react-hook-speech-to-text";
+import { useState, useEffect } from "react";
 
-export const User = ({ onFinish, onChange }) => {
+export const User = ({ setInput, setCurrentInputIndex, key }) => {
   const {
     error,
     interimResult,
     isRecording,
-    listening,
     results,
     startSpeechToText,
     stopSpeechToText,
@@ -17,9 +17,21 @@ export const User = ({ onFinish, onChange }) => {
     continuous: true,
     useLegacyResults: false,
   });
+  const [userResponse, setUserResponse] = useState("");
+
+  useEffect(() => {
+    if (!isRecording && results.length) {
+      console.log("RESULTS!!!!", results);
+      const formattedResponse = results[results.length - 1].transcript;
+      setUserResponse(formattedResponse);
+    }
+  }, [isRecording, results]);
 
   if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
-  console.log(interimResult, results);
+  const handleSubmit = () => {
+    setInput(userResponse);
+    setUserResponse("");
+  };
 
   return (
     <>
@@ -36,16 +48,10 @@ export const User = ({ onFinish, onChange }) => {
             You
           </Tag>
         </Flex>
-        {results}
-        {interimResult}
 
         <Flex flexDirection="column" gap={4}>
           <Text fontSize="3xl" color="yellow.900">
-            {results.reduce((wholeTranscript, result) => {
-              if (!result.transcript) return wholeTranscript;
-              return wholeTranscript + " " + result.transcript;
-            }, "")}
-            {interimResult}
+            {userResponse}
           </Text>
 
           <Flex gap={4}>
@@ -73,10 +79,7 @@ export const User = ({ onFinish, onChange }) => {
               {isRecording ? "Stop Recording" : "Start Recording"}
             </Button>
             <Button
-              onClick={() => {
-                console.log(results);
-                console.log(listening);
-              }}
+              onClick={handleSubmit}
               fontWeight="extrabold"
               style={{
                 backgroundColor: "#F1E5D7",
