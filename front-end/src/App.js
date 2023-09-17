@@ -1,4 +1,5 @@
-// import Uploader from "./components/Uploader.js";
+import Uploader from './components/Uploader.js';
+import FileUpload from './components/FileUpload.js';
 import Goals from "./components/Goals/Goals.js";
 import HomePlaceholder from "./components/HomePlaceholder.js";
 import { ChakraProvider, extendTheme, Heading } from "@chakra-ui/react";
@@ -45,14 +46,6 @@ function App() {
 
   if (shouldRedirect) {
     return (
-      <ChakraProvider theme={theme}>
-        <Chat />
-      </ChakraProvider>
-    );
-  }
-
-  if (shouldRedirect) {
-    return (
       <ChakraProvider>
         <Chat notes={notes} />
       </ChakraProvider>
@@ -62,16 +55,8 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <HomePlaceholder />
-
-      {/* Upload notes */}
-      <div className="uploadHeading">
-        <Heading size="md">Upload your notes</Heading>
-        <form action="" className="uploadNote">
-          <input type="file" accept="image/*" />
-        </form>
-      </div>
-
-      {/* Goals */}
+      <Uploader />
+      <FileUpload />
       <Goals />
       <div>
         <form onSubmit={handleSubmit}>
