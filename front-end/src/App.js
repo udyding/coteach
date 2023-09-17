@@ -1,3 +1,5 @@
+
+import Goals from "./components/Goals.js";
 import HomePlaceholder from "./components/HomePlaceholder.js";
 import { ChakraProvider, extendTheme, Flex } from "@chakra-ui/react";
 import FileUpload from './components/FileUpload.js';
@@ -9,7 +11,6 @@ import '@fontsource/manrope/500.css'
 import '@fontsource/manrope/600.css'
 import '@fontsource/manrope/700.css'
 import '@fontsource/manrope/800.css'
-import Goals from "./components/Goals/Goals.js";
 
 import React, { useState, useEffect } from "react";
 import Chat from "./Chat.js";
@@ -53,16 +54,22 @@ const theme = extendTheme({
 
   return (
     <ChakraProvider theme={theme}>
-      <HomePlaceholder />
-      {/* <Uploader /> */}
-      <FileUpload setFileContent={setNotes} />
-      <Goals />
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input type="text" />
-          <Button type="submit">Start Teaching</Button>
-        </form>
-      </div>
+      <Flex height="100%" width="100%"> 
+        <HomePlaceholder />
+        <Flex flexDirection='column' style={{
+            margin: 'auto'
+          }} gap={12}>
+          <Flex flexDirection='column' gap={12}>
+            <FileUpload setFileContent={setNotes} />
+            <Goals />
+          </Flex>
+          <Button onClick={handleSubmit} size='lg' style={{
+            backgroundColor: "#683F19",
+            color: "#FFF5DF",
+            borderRadius: "8px",
+          }}>Start Teaching</Button>
+        </Flex>  
+      </Flex>
     </ChakraProvider>
   );
 }

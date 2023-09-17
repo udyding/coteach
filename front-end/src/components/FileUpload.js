@@ -2,6 +2,10 @@ import React, { useState } from "react";
 // import mammoth from "mammoth";
 import PizZip from "pizzip";
 import { DOMParser } from "@xmldom/xmldom";
+import '../index.css';
+import uploadFileLogo from '../assets/uploadFile.svg';
+import { Text } from "@chakra-ui/react";
+
 
 function str2xml(str) {
     if (str.charCodeAt(0) === 65279) {
@@ -63,13 +67,62 @@ function FileUpload({setFileContent}) {
     // };
   };
 
+  const [image, setImage] = useState(null)
+  const[fileName, setFileName] = useState("No selected file")
+  
   return (
-    <div>
-      <input type="file" onChange={handleFileUpload} />
-      {paragraphs.map((p, i) => (
-        <p key={i}>{p}</p>
-      ))}
-    </div>
+    // <>
+    //   <div className="uploadNote">
+    //     <img src={uploadFileLogo} alt="logo" />
+    //     <input type="file" onChange={handleFileUpload} />
+    //     {paragraphs.map((p, i) => (
+    //       <p key={i}>{p}</p>
+    //     ))}
+    //     <p> Upload a pdf, docx, or txt file</p>
+    //   </div>
+
+    // </>
+
+    <main>
+      <Text fontSize='xl' as='b' style={
+        {
+          color: "#683F19",
+        }
+      }>Upload your notes</Text>
+      <form
+        action=""
+        onClick={() => document.querySelector(".input-field").click()}
+        className="uploadContainer"
+      >
+        <input
+          type="file"
+          className="input-field"
+          onChange={handleFileUpload}
+          hidden
+        />
+
+        <div
+          style={{
+            margin: "auto",
+          }}
+        >
+          {image ? (
+            <img src={image} width={60} height={60} alt={fileName} />
+          ) : (
+            <img
+              src={uploadFileLogo}
+              alt="logo"
+              style={{
+                width: "50px",
+                height: "50px",
+                margin: "auto",
+              }}
+            />
+          )}
+          <p> Upload a pdf, docx, or txt file</p>
+        </div>
+      </form>
+    </main>
   );
 }
 

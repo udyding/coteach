@@ -1,6 +1,5 @@
 import { Flex, Image, Tag, Text } from "@chakra-ui/react";
 import franklin from './assets/franklin.png'
-import "./styles/bot.css"
 
 
 export const Bot = ({ text }) => {

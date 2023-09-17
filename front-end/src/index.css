@@ -12,13 +12,44 @@ code {
     monospace;
 }
 
-.uploadNote {
+.uploadContainer{
+  display: flex;
   margin-top: 20px;
   margin-bottom: 50px;
-  display: inline-block;
+  flex-direction: column;
+  align-items: right;
+  border: 1px dashed #683F19;
   width: 579px;
   height: 206px;
-  padding: 20px;
-  border: 2px dotted black;
-  border-radius: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #683F19;
+}
+
+.goalDescription {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.custom-button {
+  margin-right: 10px;
+  border-color: solid 1px #a18a71;
+}
+
+.homeSubmit {
+margin-top: 45px;
+display: inline-block;
+align-items: center;
+color: white;
+background-color: #683F19;
+text-align:center;
+text-decoration: none;
+padding: 15px 32px;
+border-radius: 8px;
+font-size: 16px;
+
+}
+
+.sideContainer {
+  padding: 80px 20px 75px 215px;
 }
