@@ -1,8 +1,9 @@
 import Uploader from './components/Uploader.js';
 import Goals from "./components/Goals/Goals.js";
 import HomePlaceholder from "./components/HomePlaceholder.js";
-import { ChakraProvider } from "@chakra-ui/react";
-import chakraTheme from "@chakra-ui/theme";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import '@fontsource/manrope'
+
 import React, {useState} from 'react';
 import Chat from './Chat.js';
 import { Button, ButtonGroup } from "@chakra-ui/react";
@@ -10,7 +11,7 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 function App() {
 
 const GoalGroups = ["Memorization", "Explanation", "Application", "Analysis"];
-const [shouldRedirect, setShouldRedirect] = useState(false);
+const [shouldRedirect, setShouldRedirect] = useState(true);
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,13 +25,24 @@ const handleSubmit = (e) => {
     }
 };
 
+const theme = extendTheme({
+  fonts: {
+    heading: `'Manrope', sans-serif`,
+    body: `'Manrope', sans-serif`,
+  },
+})
+
 if(shouldRedirect) {
-    return <Chat/>;
+    return (
+      <ChakraProvider theme={theme}>
+        <Chat/>
+      </ChakraProvider>
+    )
 }
 
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <HomePlaceholder />
       <Uploader />
       <Goals />
