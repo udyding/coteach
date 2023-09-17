@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.uploadNote {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  display: inline-block;
+  width: 579px;
+  height: 206px;
+  padding: 20px;
+  border: 2px dotted black;
+  border-radius: 10px;
+}
