@@ -1,4 +1,5 @@
-import Uploader from "./components/Uploader.js";
+import Uploader from './components/Uploader.js';
+import FileUpload from './components/FileUpload.js';
 import Goals from "./components/Goals/Goals.js";
 import HomePlaceholder from "./components/HomePlaceholder.js";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
@@ -61,6 +62,7 @@ function App() {
     <ChakraProvider theme={theme}>
       <HomePlaceholder />
       <Uploader />
+      <FileUpload />
       <Goals />
       <div>
         <form onSubmit={handleSubmit}>
