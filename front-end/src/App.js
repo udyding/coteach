@@ -11,7 +11,7 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 
 function App() {
   const GoalGroups = ["Memorization", "Explanation", "Application", "Analysis"];
-  const [shouldRedirect, setShouldRedirect] = useState(true);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const [notes, setNotes] = useState("");
   const exampleNotes =
     "A distributed system is a system whose components are located on different networked computers, which communicate and coordinate their actions by passing messages to one another. Distributed computing is a field of computer science that studies distributed systems." +
@@ -41,14 +41,6 @@ function App() {
       body: `'Manrope', sans-serif`,
     },
   });
-
-  if (shouldRedirect) {
-    return (
-      <ChakraProvider theme={theme}>
-        <Chat />
-      </ChakraProvider>
-    );
-  }
 
   if (shouldRedirect) {
     return (
