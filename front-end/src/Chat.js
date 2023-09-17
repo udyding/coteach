@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Heading } from "@chakra-ui/react";
 import { Bot } from "./Bot.js";
-import { User } from "./User.js";
+import { User } from "./UserCurrent.js";
+import { UserStatic } from "./UserStatic.js";
 
 import { generateQuestions } from "./chatFunctions/generateQuestions.js";
 import { getResponse } from "./chatFunctions/getResponse.js";
@@ -54,46 +55,33 @@ export function Chat({ notes }) {
     setGetFollowupQuestion(!getFollowupQuestion);
   };
 
-  const currentText = chatHistory.at(-1);
+  const currentText = chatHistory && chatHistory[chatHistory.length - 1];
 
   return (
     <main>
       <Heading size="md">Chat</Heading>
       <div>
-        {chatHistory.slice(0, -1).map((entry) => {
-          return (
-            <h1>
-              {entry.user_name} {entry.text}
-            </h1>
-          );
+        <Bot text="Hey there! Let's start learning." />
+        {chatHistory.map((entry) => {
+          if (entry.user_name === "Chatbot") {
+            return <Bot text={entry.text} />;
+          } else {
+            return <UserStatic text={entry.text} />;
+          }
         })}
-        {currentText ? (
-          <>
-            <h1>CURRENT</h1>
-            <h3>
-              {currentText.user_name} : {currentText.text}
-            </h3>
-          </>
-        ) : (
-          <></>
-        )}
       </div>
-      {currentText ? (
-        <form onSubmit={handleSubmit}>
+      <div>
+        {currentText && currentText.user_name === "Chatbot" && <User />}
+        {/* <form onSubmit={handleSubmit}>
           <input
             type="text"
             value={currentInput}
             style={{ background: "red" }}
             onChange={(e) => setCurrentInput(e.target.value)}
-            disabled={currentText.user_name === "User"}
           />
-          <button type="submit" disabled={currentText.user_name === "User"}>
-            Submit
-          </button>
-        </form>
-      ) : (
-        <></>
-      )}
+          <button type="submit">Submit</button>
+        </form> */}
+      </div>
     </main>
   );
 }

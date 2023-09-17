@@ -1,20 +1,20 @@
+import you from "./assets/you.png";
 import { Flex, Image, Tag, Text } from "@chakra-ui/react";
-import franklin from "./assets/franklin.png";
 
-export const Bot = ({ text }) => {
+export const UserStatic = ({ text }) => {
   return (
     <>
       <Flex gap={6}>
         <Flex flexDirection="column" gap={2}>
-          <Image src={franklin} htmlWidth="90" fit alt="franklin" />
+          <Image src={you} htmlWidth="90" fit alt="you" />
           <Tag
             size="md"
             fontWeight="bold"
             justifyContent="center"
             variant="subtle"
-            colorScheme="orange"
+            colorScheme="yellow"
           >
-            Franklin
+            You
           </Tag>
         </Flex>
         <div className="typewriter">
