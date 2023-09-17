@@ -4,7 +4,9 @@ import App from "./App.js";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div style={{ height: "100vh" }} >
+      <App /> 
+    </div>
   </React.StrictMode>,
   document.getElementById("root")
 );

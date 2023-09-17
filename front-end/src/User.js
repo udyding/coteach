@@ -1,4 +1,3 @@
-import { useState } from "react";
 import you from './assets/you.png'
 import pause from './assets/pause.svg'
 import play from './assets/play.svg'
