@@ -1,16 +1,18 @@
-import Uploader from "./components/Uploader.js";
+// import Uploader from "./components/Uploader.js";
 import Goals from "./components/Goals/Goals.js";
 import HomePlaceholder from "./components/HomePlaceholder.js";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, Heading } from "@chakra-ui/react";
 import "@fontsource/manrope";
 
 import React, { useState, useEffect } from "react";
 import Chat from "./Chat.js";
 import { Button, ButtonGroup } from "@chakra-ui/react";
+import './index.css';
+// import {ReactComponent as ReactLogo} from '.uploadFile.svg';
 
 function App() {
   const GoalGroups = ["Memorization", "Explanation", "Application", "Analysis"];
-  const [shouldRedirect, setShouldRedirect] = useState(true);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const [notes, setNotes] = useState("");
   const exampleNotes =
     "A distributed system is a system whose components are located on different networked computers, which communicate and coordinate their actions by passing messages to one another. Distributed computing is a field of computer science that studies distributed systems." +
@@ -60,7 +62,16 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <HomePlaceholder />
-      <Uploader />
+
+      {/* Upload notes */}
+      <div className="uploadHeading">
+        <Heading size="md">Upload your notes</Heading>
+        <form action="" className="uploadNote">
+          <input type="file" accept="image/*" />
+        </form>
+      </div>
+
+      {/* Goals */}
       <Goals />
       <div>
         <form onSubmit={handleSubmit}>
